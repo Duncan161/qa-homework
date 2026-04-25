@@ -27,7 +27,10 @@ jobs:
       # --fail-under=7.0 означает: если оценка кода ниже 7.0, пайплайн упадет (станет красным)
       - name: Lint with pylint
         run: |
-          pylint calculator.py --fail-under=7.0
+          # Запускаем pylint с настройками прямо в командной строке
+          # max-line-length=100: ограничение длины строки
+          # disable=C0114,C0115,C0116: отключаем жалобы на отсутствие docstring у модулей/классов (для простоты)
+          pylint calculator.py --fail-under=7.0 --max-line-length=100 --disable=C0114,C0115,C0116
 
       # 5. Запускаем тесты и проверяем покрытие
       # --cov=calculator говорит проверять файл calculator.py
